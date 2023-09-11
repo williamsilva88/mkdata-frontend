@@ -1,0 +1,18 @@
+.grid-radiobutton {
+  display: flex;
+
+  .item {
+    margin: 10px;
+
+    label {
+      padding-left: 5px;
+    }
+  }
+}
+
+.align-button {
+    display: inline-flex;
+    margin-left: 100%;
+    transform: translate(-100%);
+    margin-right: -100%;
+}

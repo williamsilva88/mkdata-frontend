@@ -8,11 +8,14 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { PrimeNgModule } from 'src/app/primeng.module';
 import { ClientesComponent } from './clientes/clientes.component';
 import { NotFoundComponent } from './not-found/not-found.component';
+import { CadastroClienteComponent } from './clientes/cadastro-cliente/cadastro-cliente.component';
+import { NgxMaskModule } from 'ngx-mask';
 
 @NgModule({
   declarations: [
     ClientesComponent,
-    NotFoundComponent
+    NotFoundComponent,
+    CadastroClienteComponent
   ],
   imports: [
     CommonModule,
@@ -21,7 +24,8 @@ import { NotFoundComponent } from './not-found/not-found.component';
     MaterialModule,
     ReactiveFormsModule,
     PrimeNgModule,
-    FormsModule
+    FormsModule,
+    NgxMaskModule.forChild(),
   ],
   exports: [],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],

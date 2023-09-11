@@ -1,1 +1,128 @@
-<p>clientes works!</p>
+<p-toast></p-toast>
+<p-confirmDialog [style]="{ width: '450px' }"></p-confirmDialog>
+<div class="grid container">
+  <div class="col-12 container-form">
+    <div class="title">Clientes</div>
+  </div>
+  <div class="col-12 container-filter" [formGroup]="form">
+    <div class="p-field">
+      <label for="filterName" class="block">Nome</label>
+      <input id="filterName" type="text" pInputText formControlName="name" />
+    </div>
+    <div class="p-field">
+      <p-selectButton
+        [options]="optionsActivated"
+        formControlName="active"
+        optionLabel="text"
+      >
+        <ng-template let-item>
+          <label class="clickup">{{ item.text }}</label>
+        </ng-template>
+      </p-selectButton>
+    </div>
+    <div class="p-field">
+      <button
+        icon="pi pi-search"
+        class="p-button-secondary p-button-text"
+        pButton
+        pRipple
+        type="button"
+        label="Buscar"
+        (click)="getClients()"
+      ></button>
+    </div>
+  </div>
+  <div class="col-12">
+    <div class="card">
+      <p-toolbar styleClass="mb-4 gap-2">
+        <ng-template pTemplate="right">
+          <button
+            pButton
+            pRipple
+            label="New"
+            icon="pi pi-plus"
+            class="p-button-success mr-2"
+            (click)="openNew()"
+          ></button>
+        </ng-template>
+      </p-toolbar>
+
+      <p-table
+        #dt
+        [value]="clients"
+        [rows]="10"
+        [paginator]="true"
+        [globalFilterFields]="['nome']"
+        [tableStyle]="{ 'min-width': '75rem' }"
+        [rowHover]="true"
+        dataKey="id"
+        currentPageReportTemplate="Mostrando de {first} á {last}"
+        [showCurrentPageReport]="true"
+      >
+        <ng-template pTemplate="header">
+          <tr>
+            <th pSortableColumn="nome" style="min-width: 15rem">
+              Name <p-sortIcon field="nome"></p-sortIcon>
+            </th>
+            <th pSortableColumn="tipo" style="min-width: 15rem">
+              Tipo <p-sortIcon field="tipo"></p-sortIcon>
+            </th>
+            <th pSortableColumn="documento" style="min-width: 15rem">
+              CPF/CNPJ <p-sortIcon field="documento"></p-sortIcon>
+            </th>
+            <th pSortableColumn="documento" style="min-width: 15rem">
+              RG/IE <p-sortIcon field="documento"></p-sortIcon>
+            </th>
+            <th pSortableColumn="dataCadastro" style="min-width: 15rem">
+              Data Cadastro <p-sortIcon field="dataCadastro"></p-sortIcon>
+            </th>
+            <th pSortableColumn="ativo" style="min-width: 15rem">
+              Ativo <p-sortIcon field="ativo"></p-sortIcon>
+            </th>
+            <th>Contato</th>
+            <th></th>
+          </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-client>
+          <tr>
+            <td>{{ client.nome }}</td>
+            <td>{{ client.tipo }}</td>
+            <td>{{ client.documento | mask: (client.tipo === 'FISICA'?'000.000.000-00':'00.000.000/0000-00')}}</td>
+            <td>{{ client.rgOuIe }}</td>
+            <td>{{ client.dataCadastro }}</td>
+            <td>{{ getDescribeActive(client.ativo) }}</td>
+            <td>
+              <div *ngIf="client?.telefones?.length > 0">
+                <div *ngFor="let fone of client.telefones">
+                  <label>{{ fone?.descricao }}: {{ fone.telefone }}</label>
+                </div>
+              </div>
+            </td>
+            <td>
+              <button
+                style="margin-right: 5px"
+                pButton
+                pRipple
+                icon="pi pi-pencil"
+                class="p-button-rounded p-button-success mr-2"
+                (click)="editClient(client)"
+              ></button>
+              <button
+                pButton
+                pRipple
+                icon="pi pi-trash"
+                class="p-button-rounded p-button-warning"
+                (click)="deleteClient(client)"
+              ></button>
+            </td>
+          </tr>
+        </ng-template>
+        <ng-template pTemplate="summary">
+          <div class="flex align-items-center justify-content-between">
+            Total de {{ clients ? clients.length : 0 }} clientes.
+          </div>
+        </ng-template>
+      </p-table>
+    </div>
+  </div>
+</div>

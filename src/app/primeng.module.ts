@@ -3,9 +3,15 @@ import { ButtonModule } from 'primeng/button';
 import { FileUploadModule } from 'primeng/fileupload';
 import { MessagesModule } from 'primeng/messages';
 import { MessageModule } from 'primeng/message';
-import { MessageService } from 'primeng/api';
+import { ConfirmationService, MessageService } from 'primeng/api';
 import { ToastModule } from 'primeng/toast';
 import { DropdownModule } from 'primeng/dropdown';
+import { SelectButtonModule } from 'primeng/selectbutton';
+import { ToolbarModule } from 'primeng/toolbar';
+import { TableModule } from 'primeng/table';
+import { DialogService, DynamicDialogModule } from 'primeng/dynamicdialog';
+import { RadioButtonModule } from 'primeng/radiobutton';
+import { ConfirmDialogModule } from 'primeng/confirmdialog';
 
 @NgModule({
   declarations: [],
@@ -16,8 +22,14 @@ import { DropdownModule } from 'primeng/dropdown';
     MessageModule,
     ToastModule,
     DropdownModule,
+    SelectButtonModule,
+    ToolbarModule,
+    TableModule,
+    DynamicDialogModule,
+    RadioButtonModule,
+    ConfirmDialogModule,
   ],
-  providers: [MessageService],
+  providers: [MessageService, ConfirmationService, DialogService],
   bootstrap: [],
   exports: [
     ButtonModule,
@@ -26,6 +38,12 @@ import { DropdownModule } from 'primeng/dropdown';
     MessageModule,
     ToastModule,
     DropdownModule,
+    SelectButtonModule,
+    ToolbarModule,
+    TableModule,
+    DynamicDialogModule,
+    RadioButtonModule,
+    ConfirmDialogModule,
   ],
   schemas: [],
 })
