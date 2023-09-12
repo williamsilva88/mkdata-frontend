@@ -12,32 +12,31 @@ import { FiltroClienteDto } from '../model/filtro-cliente-dto.model';
 export class ClienteService {
   constructor(private http: HttpClient) {}
 
-  /**
-   * Busca clientes
-   */
-  /*public buscarClientes(): Observable<Array<ClienteDto>> {
-    const url: string = environment.api.main + `/clientes/list`;
-    return this.http.get<Array<ClienteDto>>(url);
-  }*/
-
   public getClients(filter: FiltroClienteDto): Observable<Array<ClienteDto>> {
-    console.log("filter:",filter);
-    return of(clientes);
+    let url: string = environment.api.main + `/cliente/list`;
+    let query = "";
+    if(filter?.nome){
+      query = !query ? `?nome=${filter?.nome}` : `nome=${filter?.nome}`; 
+    }
+    if(String(filter?.ativo) === 'true' || String(filter?.ativo) === 'false'){
+      query = !query ? `?ativo=${filter?.ativo}` : `nome=${filter?.ativo}`; 
+    }
+    url = `${url}${query}`;
+    return this.http.get<Array<ClienteDto>>(url);
   }
 
   public deleteClient(id:number): Observable<any> {
-    console.log("id:",id);
-    return of({});
+    let url: string = environment.api.main + `/cliente/${id}`;
+    return this.http.delete<any>(url);
   }
 
   public updateClient(client:ClienteDto): Observable<ClienteDto> {
-    console.log("client:",client);
-    return of(client);
+    let url: string = environment.api.main + `/cliente`;
+    return this.http.put<ClienteDto>(url,client);
   }
 
   public insertClient(client:ClienteDto): Observable<ClienteDto> {
-    console.log("client:",client);
-    client.id = 10;
-    return of(client);
+    let url: string = environment.api.main + `/cliente`;
+    return this.http.post<ClienteDto>(url,client);
   }
 }

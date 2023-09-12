@@ -94,7 +94,7 @@
             <td>
               <div *ngIf="client?.telefones?.length > 0">
                 <div *ngFor="let fone of client.telefones">
-                  <label>{{ fone?.descricao }}: {{ fone.telefone }}</label>
+                  <label>{{ fone?.descricao }}: {{ fone.telefone | mask: '(00) 0000-0000||(00) 00000-0000' }}</label>
                 </div>
               </div>
             </td>

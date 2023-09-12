@@ -126,9 +126,9 @@ export class CadastroClienteComponent implements OnInit {
     if (this.validForm()) {
       const client: ClienteDto = this.getObjectSave();
       if (client?.id > 0) {
-        this.insertClient(client);
-      } else {
         this.updateClient(client);
+      } else {
+        this.insertClient(client);
       }
     } else {
       this.messageService.add({
@@ -143,34 +143,6 @@ export class CadastroClienteComponent implements OnInit {
   insertClient(client: ClienteDto) {
     this.store.dispatch(new AtualizarLoading(true));
     this.clienteService.insertClient(client).subscribe({
-      next: (next: any) => {
-        this.messageService.add({
-          severity: 'success',
-          summary: 'Sucesso',
-          detail: 'Cliente atualizado com sucesso!',
-          life: 3000,
-        });
-        this.store.dispatch(new AtualizarLoading(false));
-        this.ref.close({
-          status: true,
-        });
-      },
-      error: (err: any) => {
-        this.store.dispatch(new AtualizarLoading(false));
-        this.messageService.add({
-          severity: 'error',
-          summary: 'Erro',
-          detail: err?.error?.message
-            ? err.error.message
-            : 'Ocorreu um problema ao atualizar cliente!',
-        });
-      },
-    });
-  }
-
-  updateClient(client: ClienteDto) {
-    this.store.dispatch(new AtualizarLoading(true));
-    this.clienteService.updateClient(client).subscribe({
       next: (next: any) => {
         this.messageService.add({
           severity: 'success',
@@ -191,6 +163,34 @@ export class CadastroClienteComponent implements OnInit {
           detail: err?.error?.message
             ? err.error.message
             : 'Ocorreu um problema ao inserir cliente!',
+        });
+      },
+    });
+  }
+
+  updateClient(client: ClienteDto) {
+    this.store.dispatch(new AtualizarLoading(true));
+    this.clienteService.updateClient(client).subscribe({
+      next: (next: any) => {
+         this.messageService.add({
+          severity: 'success',
+          summary: 'Sucesso',
+          detail: 'Cliente atualizado com sucesso!',
+          life: 3000,
+        });
+        this.store.dispatch(new AtualizarLoading(false));
+        this.ref.close({
+          status: true,
+        });
+      },
+      error: (err: any) => {
+        this.store.dispatch(new AtualizarLoading(false));
+        this.messageService.add({
+          severity: 'error',
+          summary: 'Erro',
+          detail: err?.error?.message
+            ? err.error.message
+            : 'Ocorreu um problema ao atualizar cliente!',
         });
       },
     });

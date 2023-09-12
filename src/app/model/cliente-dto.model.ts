@@ -31,7 +31,7 @@ export class ClienteDto implements ClienteDto {
     this.documento = documento ? documento : '';
     this.rgOuIe = rgOuIe ? rgOuIe : '';
     this.dataCadastro = dataCadastro ? dataCadastro : '';
-    this.ativo = ativo ? ativo : false;
+    this.ativo = ativo ? ativo : true;
     this.telefones = telefones ? telefones : [];
   }
 }
