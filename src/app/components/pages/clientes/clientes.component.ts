@@ -8,6 +8,7 @@ import { CadastroClienteComponent } from './cadastro-cliente/cadastro-cliente.co
 import { Store } from '@ngxs/store';
 import { AtualizarLoading } from 'src/app/state/main.actions';
 import { FiltroClienteDto } from 'src/app/model/filtro-cliente-dto.model';
+import { DateUtils } from 'src/app/utils/date.service';
 
 @Component({
   selector: 'app-clientes',
@@ -123,5 +124,9 @@ export class ClientesComponent implements OnInit {
 
   getEventValue(event: any) {
     return event?.target?.value;
+  }
+
+  formatDate(value:string){
+    return DateUtils.dateStringFormat(value,'yyyy-mm-ddThh:mi:ss','dd/mm/yyyy hh:mi:ss');
   }
 }

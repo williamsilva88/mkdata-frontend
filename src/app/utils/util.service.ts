@@ -7,6 +7,24 @@ export class UtilService {
   constructor() {}
 
   /**
+     * Método que a completa com "0" a esquerda.
+     * @param value texto a ser completado com 0
+     * @param padding tamanho do campo a ser completado com 0
+     * @returns
+     */
+  public static lpad = (
+    value: string = "",
+    padding: number = 0,
+    char = "0"
+) => {
+    var zeroes = char;
+    for (var i = 0; i < padding; i++) {
+        zeroes += char;
+    }
+    return (zeroes + value).slice(padding * -1);
+};
+
+  /**
    * Retorna valor boleano se variável é vazia ou nula.
    * Desconsidere zero como vazio
    * @param value Valor que deseja validar se está vazio
