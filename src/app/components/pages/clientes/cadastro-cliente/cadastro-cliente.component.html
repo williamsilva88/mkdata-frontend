@@ -1,0 +1,132 @@
+<div class="grid container">
+  <div class="col-12 container-form" style="border-bottom: 1px solid #e7e7e7">
+    <div [formGroup]="form">
+      <div class="p-field">
+        <label for="nome">Nome</label>
+        <input
+          type="text"
+          pInputText
+          id="nome"
+          formControlName="nome"
+          required
+          autofocus
+        />
+        <small class="p-error" *ngIf="submitted && !form.controls['nome'].valid"
+          >Nome é obrigatório.</small
+        >
+      </div>
+      <div class="p-field">
+        <label for="tipo">Tipo</label>
+        <p-dropdown
+          id="tipo"
+          [options]="tiposDocumentos"
+          formControlName="tipo"
+          optionLabel="name"
+        ></p-dropdown>
+        <small class="p-error" *ngIf="submitted && !form.controls['tipo'].valid"
+          >Tipo é obrigatório.</small
+        >
+      </div>
+      <div class="p-field">
+        <label for="documento">{{describeTypeDocument}}</label>
+        <input
+          type="text"
+          pInputText
+          id="documento"
+          formControlName="documento"
+          required
+          autofocus
+          [mask]="describeTypeDocument === 'CPF'?'000.000.000-00':'00.000.000/0000-00'"
+        />
+        <small
+          class="p-error"
+          *ngIf="submitted && !form.controls['documento'].valid"
+          >Documento CPF ou CNPJ é obrigatório.</small
+        >
+      </div>
+      <div class="p-field">
+        <label for="rgOuIe">{{describeTypeDocumentComp}}</label>
+        <input
+          type="text"
+          pInputText
+          id="rgOuIe"
+          formControlName="rgOuIe"
+          required
+          autofocus
+          mask="0*"
+        />
+      </div>
+      <div class="p-field">
+        <label class="mb-3">Ativo</label>
+        <div class="grid-radiobutton">
+          <div class="item">
+            <p-radioButton
+              name="ativo"
+              value="true"
+              formControlName="ativo"
+              inputId="Sim"
+            ></p-radioButton>
+            <label for="Sim">Sim</label>
+          </div>
+          <div class="item">
+            <p-radioButton
+              name="ativo"
+              value="false"
+              formControlName="ativo"
+              inputId="Nao"
+            ></p-radioButton>
+            <label for="Nao">Não</label>
+          </div>
+        </div>
+      </div>
+      <div class="p-field">
+        <label>Telefones:</label>
+      </div>
+      <ng-container formArrayName="telefones">
+        <ng-container *ngFor="let telForm of telefones.controls; let i = index">
+          <div [formGroup]="telForm" style="margin-left: 20px;">
+            <div class="grid">
+                <div class="col-5">
+                    <div class="p-field">
+                        <label for="telDescricao">Descrição</label>
+                        <input type="text" pInputText id="telDescricao" formControlName="descricao" required autofocus />
+                    </div>
+                </div>
+                <div class="col-5">
+                    <div class="p-field">
+                        <label for="telTelefone">Telefone</label>
+                        <input type="text" pInputText id="telTelefone" formControlName="telefone" required autofocus mask="(00) 0000-0000||(00) 00000-0000"/>
+                    </div>
+                </div>  
+                <div class="col-2" style="align-content: center;display: grid;">
+                    <i class="pi pi-times-circle" style="margin-top: 20px;cursor: pointer;" (click)="deletePhone(i)"></i>
+                </div> 
+            </div>
+          </div>
+        </ng-container>
+      </ng-container>
+      <button mat-mini-fab (click)="addPhone()" style="margin-left: 50%;transform: translate(-50%);">
+        <mat-icon class="add-course-btn">add</mat-icon>
+        </button>
+    </div>
+  </div>
+  <div class="col-12 container-form">
+    <div class="align-button">
+      <button
+        pButton
+        pRipple
+        label="Cancel"
+        icon="pi pi-times"
+        class="p-button-text"
+        (click)="hideDialog()"
+      ></button>
+      <button
+        pButton
+        pRipple
+        label="Save"
+        icon="pi pi-check"
+        (click)="saveClient()"
+      ></button>
+    </div>
+  </div>
+</div>

@@ -7,6 +7,44 @@ body {
 body {
   margin: 0;
   font-family: Roboto, "Helvetica Neue", sans-serif;
+  font-size: 12px;
+}
+
+.p-field {
+  display: block;
+  align-content: end;
+  display: grid;
+  margin-left: 10px;
+  padding-bottom: 5px;
+
+  label {
+    color: #495057;
+    padding-bottom: 5px;
+  }
+}
+
+input {
+  min-height: 38px;
+  color: #6e7379;
+  padding-left: 10px;
+  font-size: 12px;
+}
+
+.container {
+  margin-left: 5px;
+}
+
+.clickup {
+  cursor: pointer;
+}
+
+.container-form {
+  padding-bottom: 15px!important;
+  padding-top: 15px!important;
+}
+
+.p-radiobutton .p-radiobutton-box .p-radiobutton-icon{
+  background-color: #ffdb6e!important;
 }
 
 .mat-card-header-text {
@@ -26,11 +64,11 @@ body {
 }
 
 .primeng-uploadStyleClass {
-    .p-fileupload-buttonbar{
-        align-items: center;
-        display: flex;
-        flex-direction: row;
-        flex-wrap: wrap;
-        justify-content: center;
-    }  
+  .p-fileupload-buttonbar {
+    align-items: center;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
 }

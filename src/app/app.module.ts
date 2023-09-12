@@ -8,11 +8,10 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterModule } from '@angular/router';
 import { NgxsModule } from '@ngxs/store';
 import { LoadingModule } from './components/core/loading/loading.module';
+import { NgxMaskModule } from 'ngx-mask';
 
 @NgModule({
-  declarations: [
-    AppComponent
-  ],
+  declarations: [AppComponent],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
@@ -21,13 +20,12 @@ import { LoadingModule } from './components/core/loading/loading.module';
     AppRoutingModule,
     RouterModule,
     NgxsModule.forRoot([]),
-    LoadingModule
+    LoadingModule,
+    NgxMaskModule.forRoot({}),
   ],
   providers: [],
   bootstrap: [AppComponent],
-  exports: [
-    LoadingModule
-  ],
-  schemas: [ CUSTOM_ELEMENTS_SCHEMA ]
+  exports: [LoadingModule],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
-export class AppModule { }
+export class AppModule {}
