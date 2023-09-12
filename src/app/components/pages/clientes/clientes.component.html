@@ -89,7 +89,7 @@
             <td>{{ client.tipo }}</td>
             <td>{{ client.documento | mask: (client.tipo === 'FISICA'?'000.000.000-00':'00.000.000/0000-00')}}</td>
             <td>{{ client.rgOuIe }}</td>
-            <td>{{ client.dataCadastro }}</td>
+            <td>{{ formatDate(client.dataCadastro) }}</td>
             <td>{{ getDescribeActive(client.ativo) }}</td>
             <td>
               <div *ngIf="client?.telefones?.length > 0">
